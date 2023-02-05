@@ -1,0 +1,83 @@
+//Problem 1, Solution 1 with an array:
+ALGORITHM SommeDiferent
+VAR
+tab1: ARRAY_OF INTEGER[n]; 
+tab2: ARRAY_OF INTEGER[m];
+i, j : INTEGER;
+sum : INTEGER;
+same:INTEGER;
+BEGIN
+
+tab1 := {tab1_elements}; 
+tab2 := {tab2_elements}; 
+sum := 0; 
+
+FOR i FROM 0 TO n-1 STEP 1 DO
+	same:=0;
+      FOR j FROM 0 TO m-1 STEP 1 DO
+	IF (tab1[i] = tab2[j]) THEN
+	  same=same+1;
+	END_IF
+      END_FOR
+      IF (same=0)THEN
+	sum := sum + set1[i];
+    END_IF
+END_FOR
+
+FOR i FROM 0 TO m-1 STEP 1 DO
+	same:=0;
+      FOR j FROM 0 TO n-1 STEP 1 DO
+	IF (tab2[i] = tab1[j]) THEN
+	  same=same+1;
+	END_IF
+     END_FOR
+     IF (same=0) THEN
+	sum := sum + set2[i];
+     END_IF
+END_FOR
+Write("La somme des nombres diferent et:",sum);
+END
+
+
+
+
+
+
+//Problem 1, Solution 2 with an hash table:
+ALGORITHM SommeDiferent
+VAR
+tab1 : ARRAY_OF INTEGER[n]; 
+tab2 : ARRAY_OF INTEGER[m]; 
+hashtab : HASH_TABLE; 
+sum, i : INTEGER;
+ 
+BEGIN
+tab1 := {tab1_elements}; 
+tab2 := {tab2_elements}; 
+
+FOR i FROM 0 TO n-1 STEP 1 DO
+if hashtab.contains(tab1[i]) then
+hashtab[tab1[i]] := hashtab[tab1[i]] + 1;
+else
+hashtab[tab1[i]] := 1;
+end_if
+END_FOR
+FOR i FROM 0 TO m-1 STEP 1 DO
+if hashtab.contains(tab2[i]) then
+hashtab[tab2[i]] := hashtab[tab2[i]] + 1;
+else
+hashtab[tab2[i]] := 1;
+end_if
+END_FOR
+
+
+sum := 0;
+
+for key in SommeDiferent.keys() do
+if hashtab[key] = 1 then
+sum := sum + key;
+end_if
+end_for
+
+Write("La somme des nombres diferent et:", sum);
+END
